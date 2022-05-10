@@ -19,16 +19,29 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
+let totalScores, currentScore, activePlayer, playing;
 
 //Preparing Initial Position of the Game
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+const initial = function(){
+    totalScores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true;
 
-const totalScores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0El.textContent = 0;
+    current1El.textContent = 0;
+
+    diceEl.classList.add('hidden');
+    currentPlayer0El.classList.remove('player--winner');
+    currentPlayer1El.classList.remove('player--winner');
+    currentPlayer0El.classList.add('player--active');
+    currentPlayer1El.classList.remove('player--active');
+}
+
+initial();
+
 
 //Switch Player Function
 const switchPlayer = function(){
@@ -69,7 +82,7 @@ btnRoll.addEventListener('click', function(){
     }
 });
 
-
+//Hold Button Function
 btnHold.addEventListener('click', function(){
 
     if (playing) {
@@ -95,3 +108,8 @@ btnHold.addEventListener('click', function(){
 });
 
 
+
+//New Game Function
+btnNew.addEventListener('click', function(){
+    initial();
+});
